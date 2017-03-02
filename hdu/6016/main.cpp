@@ -1,12 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <cstdio>
+#include <cstring>
 
 using namespace std;
 
-const int offset = 1e5 + 7;
+const int SIZE   = 1e5 + 1;
 
-vector<int> Edge[1e5 + 1 + offset];
+vector<int> Edge[SIZE];
+int cnt[SIZE];
 
 int main()
 {
@@ -14,13 +16,25 @@ int main()
     long long ans;
 
     scanf("%d", &T);
-    for(int cas = 0; cas <= T; cas++){
+    for(int cas = 1; cas <= T; cas++){
         scanf("%d%d%d", &n, &m, &k);
-        for(int i = 0; i < k; i++){
-            scanf("%d%d", u, v);
-            Edge[u].push_back(v + offset);
-            Edge[v + offset].push_back(u);
+        for(int i = 1; i <= n; i++){
+            Edge[i].clear();
         }
+        memset(cnt, 0, sizeof(cnt));
+        for(int i = 0; i < k; i++){
+            scanf("%d%d", &u, &v);
+            Edge[v].push_back(u);
+            cnt[u]++;
+        }
+        ans = 0;
+        for(int i = 1; i <= m; i++){
+            long long temp = Edge[i].size() - 1;
+            for(int x : Edge[i]){
+                ans += temp * (cnt[x] - 1);
+            }
+        }
+        printf("%lld\n", ans * 2);
     }
     return 0;
 }
