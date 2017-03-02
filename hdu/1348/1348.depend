@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1481950279 source:g:\hrbsw\1348\main.cpp
+	<iostream>
+	<algorithm>
+	<cstdio>
+	<cmath>
+
+1481950623 source:g:\hdu\1348\main.cpp
+	<iostream>
+	<algorithm>
+	<cstdio>
+	<cmath>
+

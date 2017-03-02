@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1480395130 source:g:\hdu\2128\main.cpp
+	<iostream>
+	<utility>
+	<algorithm>
+	<vector>
+	<cstdio>
+	<cstring>
+
