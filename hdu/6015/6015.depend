@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1488450518 source:g:\githubs\code\hdu\6015\main.cpp
+	<iostream>
+	<algorithm>
+	<string>
+	<map>
+	<cstdio>
+
