@@ -34,7 +34,7 @@ int main()
                 ans += temp * (cnt[x] - 1);
             }
         }
-        printf("%lld\n", ans * 2);
+        printf("%lld\n", ans <<1);
     }
     return 0;
 }
