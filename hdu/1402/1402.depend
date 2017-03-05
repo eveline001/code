@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1481901762 source:e:\works\code\temp\1402\main.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	<cmath>
+	<iostream>
+	<cstdio>
+	<algorithm>
+	<cmath>
+	<cstring>
+

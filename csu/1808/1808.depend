@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1476197983 source:e:\works\code\csuoj\1808\main.cpp
+	<iostream>
+	<queue>
+	<algorithm>
+	<cstdio>
+	<cstring>
+	<map>
+	<set>
+	<stack>
+	<queue>
+	<cmath>
+	<string>
+	<vector>
+	<cstdio>
+	<cctype>
+	<cstring>
+	<sstream>
+	<cstdlib>
+	<iostream>
+	<algorithm>
+

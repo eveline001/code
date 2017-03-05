@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1471510724 source:c:\users\lxw\documents\csuoj\1116\main.cpp
+	<iostream>
+	<algorithm>
+	<cstdio>
+	<cstring>
+	<stdio.h>
+	<algorithm>
+	<iostream>
+	<cstring>
+

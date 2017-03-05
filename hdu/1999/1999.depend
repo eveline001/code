@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1483168669 source:e:\works\code\hdoj\1999\main.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+

@@ -43,7 +43,7 @@ Node   Tree[2000 << 2];
 
 void BuildUp(int l, int r, int rt){
     if(l == r){
-        Tree[l].cnt = 0;
+        Tree[rt].cnt = 0;
         Tree[rt].len = 0.0;
         return;
     }

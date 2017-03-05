@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1476502233 source:e:\works\code\hdoj\uf 3388\main.cpp
+	<iostream>
+	<bitset>
+	<cstdio>
+	<cstring>
+	<iostream>
+	<string.h>
+	<algorithm>
+	<stdio.h>
+	<iostream>
+	<string.h>
+	<algorithm>
+	<stdio.h>
+

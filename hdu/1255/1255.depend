@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1470732107 source:c:\users\lxw\documents\hdoj\1255\main.cpp
+	<cstdio>
+	<iostream>
+	<algorithm>
+	<map>
+	<cstdio>
+	<iostream>
+	<stdio.h>
+	<algorithm>
+
+1478075648 source:e:\works\code\hdoj\1255\main.cpp
+	<iostream>
+	<algorithm>
+	<map>
+	<cstdio>
+
