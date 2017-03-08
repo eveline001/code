@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int SIZE   = 1e5 + 1;
+const int SIZE = 1e5 + 1;
 
 vector<int> Edge[SIZE];
 int cnt[SIZE];
@@ -18,7 +18,7 @@ int main()
     scanf("%d", &T);
     for(int cas = 1; cas <= T; cas++){
         scanf("%d%d%d", &n, &m, &k);
-        for(int i = 1; i <= n; i++){
+        for(int i = 1; i <= m; i++){
             Edge[i].clear();
         }
         memset(cnt, 0, sizeof(cnt));
@@ -34,7 +34,7 @@ int main()
                 ans += temp * (cnt[x] - 1);
             }
         }
-        printf("%lld\n", ans <<1);
+        printf("%I64d\n", (ans << 1));
     }
     return 0;
 }
