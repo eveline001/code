@@ -83,6 +83,7 @@ int main()
         long long ans = 0;
         for(int i = 63; i >= 1; i--){
             long long x = FindL(i), y = FindR(i), d = max(y - x + 1, 0LL);
+            /* 容斥 */
             if(d){
                 d -= cnt[i];
                 if(d){
