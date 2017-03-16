@@ -1,6 +1,5 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 #include <cstdio>
 #include <cstring>
 
@@ -8,7 +7,13 @@ using namespace std;
 
 const int MAX = 100001;
 
-vector<int> Edge[MAX];
+struct Edge{
+    int to, next;
+};
+
+Edge Edges[MAX << 1];
+int head[MAX];
+int cnt;
 int Road[MAX][3];
 int fa[MAX], sz[MAX], de[MAX], sn[MAX], tp[MAX], id[MAX];
 int val[MAX];
@@ -17,7 +22,8 @@ int tol;
 
 void DfsTree(int x, int father, int deep){
     fa[x] = father, de[x] = deep, sz[x] = 1, sn[x] = 0;
-    for(int v : Edge[x]){
+    for(int i = head[x]; ~i; i = Edges[i].next){
+        int v = Edges[i].to;
         if(v != father){
             DfsTree(v, x, deep + 1);
             sz[x] += sz[v];
@@ -34,7 +40,8 @@ void DfsChain(int x, int top){
     id[x] = ++tol;
     if(sn[x]){
         DfsChain(sn[x], top);
-        for(int v : Edge[x]){
+        for(int i = head[x]; ~i; i = Edges[i].next){
+            int v = Edges[i].to;
             if(v != sn[x] && v != fa[x]){
                 DfsChain(v, v);
             }
@@ -50,7 +57,7 @@ void PushUp(int rt){
 
 void BuildUp(int l, int r, int rt){
     if(l == r){
-        sum[rt] = 0;
+        sum[rt] = val[l];
         return;
     }
     int mid = (l + r) >> 1;
@@ -112,25 +119,24 @@ int main()
     int n, q, s, u, v, w, op;
 
     while(scanf("%d%d%d", &n, &q, &s) != EOF){
-        for(int i = 1; i <= n; i++){
-            Edge[i].clear();
-        }
+        memset(head, -1, sizeof(head));
+        cnt = 0;
         for(int i = 1; i < n; i++){
             scanf("%d%d%d", &u, &v, &w);
-            Edge[u].push_back(v);
-            Edge[v].push_back(u);
+            Edges[cnt].to = v, Edges[cnt].next = head[u], head[u] = cnt++;
+            Edges[cnt].to = u, Edges[cnt].next = head[v], head[v] = cnt++;
             Road[i][0] = u, Road[i][1] = v, Road[i][2] = w;
         }
         tol = 0;
         DfsTree(1, 1, 0);
         DfsChain(1, 1);
-        BuildUp(2, n, 1);
         for(int i = 1; i < n; i++){
             if(de[Road[i][0]] < de[Road[i][1]]){
                 swap(Road[i][0], Road[i][1]);
             }
-            Update(id[Road[i][0]], Road[i][2], 2, n, 1);
+            val[id[Road[i][0]]] = Road[i][2];
         }
+        BuildUp(2, n, 1);
         for(int i = 0; i < q; i++){
             scanf("%d", &op);
             if(op == 0){
