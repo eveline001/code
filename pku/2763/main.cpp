@@ -3,7 +3,176 @@
 http://blog.csdn.net/y990041769/article/details/40983749 2125ms
 TLE
 */
+#include <cstdio>
+#include <cstring>
+#include <vector>
+#include <algorithm>
 
+using namespace std;
+
+#define Del(a,b) memset(a,b,sizeof(a))
+
+const int N = 100005;
+int dep[N],siz[N],fa[N],id[N],son[N],val[N],top[N]; //top 最近的重链父节点
+int num,head[N],cnt;
+
+struct Edge{
+    int to,next;
+};
+
+Edge v[N*2];
+
+struct tree{
+    int x, y, val;
+    void read(){
+        scanf("%d%d%d", &x, &y, &val);
+    }
+};
+
+void add_Node(int x,int y)
+{
+    v[cnt].to = y;
+    v[cnt].next = head[x];
+    head[x] = cnt++;
+}
+
+tree e[N];
+
+void dfs1(int u, int f, int d){
+    dep[u] = d, siz[u] = 1, son[u] = 0, fa[u] = f;
+    for(int i = head[u]; i != -1 ;i = v[i].next){
+        int to = v[i].to;
+        if(to != f){
+            dfs1(to,u,d+1);
+            siz[u] += siz[to];
+            if(siz[son[u]] < siz[to])
+                son[u] = to;
+        }
+    }
+}
+
+void dfs2(int u, int tp){
+    top[u] = tp;
+    id[u] = ++num;
+    if (son[u]) dfs2(son[u], tp);
+    for(int i = head[u]; i != -1 ;i = v[i].next)
+    {
+        int to = v[i].to;
+        if(to == fa[u] || to == son[u])
+            continue;
+        dfs2(to,to);
+    }
+}
+
+#define lson(x) ((x<<1))
+#define rson(x) ((x<<1)+1)
+
+struct Tree
+{
+    int l,r,val;
+};
+
+Tree tree[4*N];
+
+void pushup(int x){
+    tree[x].val = tree[lson(x)].val + tree[rson(x)].val;
+}
+
+void build(int l,int r,int v)
+{
+    tree[v].l=l;
+    tree[v].r=r;
+    if(l==r){
+        tree[v].val = val[l];
+        return;
+    }
+    int mid=(l+r)>>1;
+    build(l,mid,v*2);
+    build(mid+1,r,v*2+1);
+    pushup(v);
+}
+
+void update(int o,int v,int val)  //log(n)
+{
+    if(tree[o].l==tree[o].r)
+    {
+        tree[o].val = val;
+        return ;
+    }
+    int mid = (tree[o].l+tree[o].r)/2;
+    if(v<=mid)
+        update(o*2,v,val);
+    else
+        update(o*2+1,v,val);
+    pushup(o);
+}
+
+int query(int o,int l, int r)
+{
+    if(tree[o].l >= l && tree[o].r <= r){
+        return tree[o].val;
+    }
+    int mid = (tree[o].l + tree[o].r) / 2;
+    if(r<=mid)
+        return query(o+o,l,r);
+    else if(l>mid)
+        return query(o+o+1,l,r);
+    else
+        return query(o+o,l,mid) + query(o+o+1,mid+1,r);
+}
+
+int Yougth(int u, int v){
+    int tp1 = top[u], tp2 = top[v];
+    int ans = 0;
+    while (tp1 != tp2){
+        if (dep[tp1] < dep[tp2]){
+            swap(tp1, tp2);
+            swap(u, v);
+        }
+        ans += query(1,id[tp1], id[u]);
+        u = fa[tp1];
+        tp1 = top[u];
+    }
+    if(u == v) return ans;
+    if(dep[u] > dep[v]) swap(u, v);
+    ans += query(1,id[son[u]], id[v]);
+    return ans;
+}
+int main()
+{
+    int n, m, s;
+    while(scanf("%d%d%d", &n, &m, &s) != EOF){
+        cnt = 0;
+        memset(head, -1, sizeof(head));
+        for(int i = 1; i < n; i++){
+            e[i].read();
+            add_Node(e[i].x, e[i].y);
+            add_Node(e[i].y, e[i].x);
+        }
+        num = 0;
+        dfs1(1, 0, 1);
+        dfs2(1, 1);
+        for(int i = 1; i < n; i++){
+            if(dep[e[i].x] < dep[e[i].y]) swap(e[i].x, e[i].y);
+            val[id[e[i].x]] = e[i].val;
+        }
+        build(1, num, 1);
+        for(int i = 0; i < m; i++){
+            int ok, x, y;
+            scanf("%d", &ok);
+            if(ok == 0){
+                scanf("%d", &x);
+                printf("%d\n", Yougth(s, x));
+                s = x;
+            }else{
+                scanf("%d%d", &x, &y);
+                update(1,id[e[x].x],y);
+            }
+        }
+    }
+    return 0;
+}
+/*
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -157,3 +326,4 @@ int main()
     }
     return 0;
 }
+*/
