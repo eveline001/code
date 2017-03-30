@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1490155094 source:e:\works\githubs\code\pku\3237\main.cpp
+	<iostream>
+	<algorithm>
+	<cstdio>
+	<cstring>
+
