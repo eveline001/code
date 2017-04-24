@@ -6,11 +6,11 @@
 
 using namespace std;
 
-int a[201][2], b[201][2];
+int a[101][2], b[101][2];
 bool e[101][101];
 
-bool vis[201];
-int result[201];
+bool vis[101];
+int result[101];
 
 bool match(int x, int n){
     for(int i = 0; i < n; i++){
