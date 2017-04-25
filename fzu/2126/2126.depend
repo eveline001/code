@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1493099983 source:e:\works\githubs\code\fzu\2126\main.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+
