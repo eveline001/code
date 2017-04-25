@@ -42,10 +42,9 @@ int main()
             RE[name].Push(val);
         }
         ans = 0;
-        for(auto& it : RE){
-            ans += it.second.Sum();
-        }
+        for(auto& it : RE) ans += it.second.Sum();
         printf("%d\n", ans);
     }
+
     return 0;
 }
