@@ -45,6 +45,5 @@ int main()
         for(auto& it : RE) ans += it.second.Sum();
         printf("%d\n", ans);
     }
-
     return 0;
 }
