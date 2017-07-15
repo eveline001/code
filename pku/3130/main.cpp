@@ -13,7 +13,7 @@ int tol, pn, dq[MAXN];
 struct Point{
     double x, y;
 
-    Point(double x = 0.0, double y =0.0) : x(x), y(y) {}
+    Point(double x = 0.0, double y = 0.0) : x(x), y(y) {}
 
     Point& operator = (const Point& other){
         this->x = other.x, this->y = other.y;

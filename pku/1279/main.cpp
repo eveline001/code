@@ -92,9 +92,11 @@ double GetArea(){
 
 int main()
 {
-    int n, x0, y0, x1, y1, x2, y2, floor = 0;
+    int T, n, x0, y0, x1, y1, x2, y2, floor = 0;
 
-    while(scanf("%d", &n) != EOF && n){
+    scanf("%d", &T);
+    for(int cas = 1; cas <= T; cas++){
+        scanf("%d", &n);
         tol = 0, floor++;
         scanf("%d %d", &x0, &y0);
         x1 = x0, y1= y0;
@@ -105,7 +107,7 @@ int main()
         }
         AddLine(L[tol++], x0, y0, x1, y1);
         HalfPlaneIntersect();
-        printf("Floor #%d\nSurveillance is %spossible.\n\n", floor, pn < 3 ? "im" : "");
+        printf("%.2f\n", GetArea());
     }
     return 0;
 }
