@@ -6,8 +6,8 @@
 using namespace std;
 
 const int MAXN = 10000;
-const double eps = 1e-18;
-const double inf = 1e18;
+const double eps = 1e-8;
+const double inf = 1e10;
 
 int tol, dq[MAXN], n;
 
