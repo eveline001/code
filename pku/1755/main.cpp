@@ -6,9 +6,10 @@
 using namespace std;
 
 const int MAXN = 10000;
-const double eps = 1e-8;
+const double eps = 1e-18;
+const double inf = 1e18;
 
-int tol, pn, dq[MAXN];
+int tol, dq[MAXN], n;
 
 struct Point{
     double x, y;
@@ -20,8 +21,6 @@ struct Point{
         return *this;
     }
 };
-
-Point P[MAXN];
 
 struct Line{
     Point a, b;
@@ -39,15 +38,15 @@ void AddLine(Line& L, double x1, double y1, double x2, double y2){
     L.a = Point(x1, y1), L.b = Point(x2, y2), L.angle = atan2(y2 - y1, x2 - x1);
 }
 
-inline int dbcmp(const double& k){
+int dbcmp(const double& k){
     return fabs(k) < eps ? 0 : k > 0 ? 1 : -1;
 }
 
-inline double cross(const Point& O, const Point& A, const Point& B){
+double cross(const Point& O, const Point& A, const Point& B){
     return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
 }
 
-inline bool cmp(const Line& L1, const Line& L2){
+bool cmp(const Line& L1, const Line& L2){
     int d = dbcmp(L1.angle - L2.angle);
     return d ? d < 0 : dbcmp(cross(L1.a, L2.a, L2.b)) > 0;
 }
@@ -63,14 +62,14 @@ Point GetIntersect(const Line& L1, const Line& L2){
 }
 
 bool judge(const Line& L0, const Line& L1, const Line& L2){
-    return dbcmp(cross(GetIntersect(L1, L2), L0.a, L0.b)) < 0;
+    return dbcmp(cross(GetIntersect(L1, L2), L0.a, L0.b)) <= 0.0;
 }
 
-void HalfPlaneIntersect(){
+bool HalfPlaneIntersect(){
     int j = 0, top, bot;
 
     sort(L, L + tol, cmp);
-    for(int i = 0; i < tol; i++) if(dbcmp(L[i].angle - L[j].angle) > 0) L[++j] = L[i];
+    for(int i = 1; i < tol; i++) if(dbcmp(L[i].angle - L[j].angle) > 0) L[++j] = L[i];
     tol = j + 1, dq[0] = 0, dq[1] = 1, top = 1, bot = 0;
     for(int i = 2; i < tol; i++){
         while(top > bot && judge(L[i], L[dq[top]], L[dq[top - 1]])) top--;
@@ -79,33 +78,44 @@ void HalfPlaneIntersect(){
     }
     while(top > bot && judge(L[dq[bot]], L[dq[top]], L[dq[top - 1]])) top--;
     while(top > bot && judge(L[dq[top]], L[dq[bot]], L[dq[bot + 1]])) bot++;
-    dq[++top] = dq[bot], pn = 0;
-    for(int i = bot; i < top; i++, pn++) P[pn] = GetIntersect(L[dq[i + 1]], L[dq[i]]);
+    return top - bot > 1 ? true : false;
 }
 
-double GetArea(){
-    if(pn < 3) return 0.0;
-    double area = 0.0;
-    for(int i = 1; i < pn - 1; i++) area += cross(P[0], P[i], P[i + 1]);
-    return area < 0 ? -area / 2.0 : area / 2.0;
+double V[110], U[110], W[110];
+
+bool Judgement(int x){
+    double A, B, C;
+    int dA, dB, dC;
+    tol = 0;
+    AddLine(L[tol++], 0, 0, inf, 0);
+    AddLine(L[tol++], inf, 0, inf, inf);
+    AddLine(L[tol++], inf, inf, 0, inf);
+    AddLine(L[tol++], 0, inf, 0, 0);
+    for(int i = 0; i < n; i++){
+        if(i == x) continue;
+        A = (V[x] - V[i]) / (V[x] * V[i]);
+        B = (U[x] - U[i]) / (U[x] * U[i]);
+        C = (W[x] - W[i]) / (W[x] * W[i]);
+        dA = dbcmp(A), dB = dbcmp(B), dC = dbcmp(C);
+        if(dB > 0){
+            if(dA != 0) AddLine(L[tol++], 0, - C / B, 1, - (A + C) / B);
+            else AddLine(L[tol++], 0, - C / B, 1, - C / B);
+        }else if(dB == 0){
+            if(dA > 0) AddLine(L[tol++], - C / A, 0, - C / A, -1);
+            else if(dA == 0){if(dC <= 0) return false;}
+            else{if(dC <= 0) return false; else AddLine(L[tol++], - C / A, 0, - C / A, 1);}
+        }else{
+            if(dA != 0) AddLine(L[tol++], 0, - C / B, -1, - (C - A) / B);
+            else{if(dC <= 0) return false; else AddLine(L[tol++], 0, - C / B, -1, - C / B);}
+        }
+    }
+    return HalfPlaneIntersect();
 }
 
 int main()
 {
-    int n, x0, y0, x1, y1, x2, y2, floor = 0;
-
-    while(scanf("%d", &n) != EOF && n){
-        tol = 0, floor++;
-        scanf("%d %d", &x0, &y0);
-        x1 = x0, y1= y0;
-        for(int i = 1; i < n; i++){
-            scanf("%d %d", &x2, &y2);
-            AddLine(L[tol++], x2, y2, x1, y1);
-            x1 = x2, y1 = y2;
-        }
-        AddLine(L[tol++], x0, y0, x1, y1);
-        HalfPlaneIntersect();
-        printf("Floor #%d\nSurveillance is %spossible.\n\n", floor, pn < 3 ? "im" : "");
-    }
+    scanf("%d", &n);
+    for(int i = 0; i < n; i++) scanf("%lf%lf%lf", &V[i], &U[i], &W[i]);
+    for(int i = 0; i < n; i++) printf("%s\n", Judgement(i) ? "Yes" : "No");
     return 0;
 }

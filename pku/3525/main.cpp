@@ -6,7 +6,7 @@
 using namespace std;
 
 const int MAXN = 10000;
-const double esp = 1e-8;
+const double eps = 1e-8;
 
 int tol, pn, dq[MAXN], n;
 
@@ -40,7 +40,7 @@ void AddLine(Line& L, double x1, double y1, double x2, double y2){
 }
 
 inline int dbcmp(const double& k){
-    return fabs(k) < esp ? 0 : k > 0 ? 1 : -1;
+    return fabs(k) < eps ? 0 : k > 0 ? 1 : -1;
 }
 
 inline double cross(const Point& O, const Point& A, const Point& B){
@@ -77,8 +77,8 @@ void HalfPlaneIntersect(){
         while(top > bot && judge(L[i], L[dq[bot]], L[dq[bot + 1]])) bot++;
         dq[++top] = i;
     }
-    while(top > bot && judge(L[bot], L[dq[top]], L[dq[top - 1]])) top--;
-    while(top > bot && judge(L[top], L[dq[bot]], L[dq[bot + 1]])) bot++;
+    while(top > bot && judge(L[dq[bot]], L[dq[top]], L[dq[top - 1]])) top--;
+    while(top > bot && judge(L[dq[top]], L[dq[bot]], L[dq[bot + 1]])) bot++;
     pn = top - bot + 1;
     //dq[++top] = dq[bot], pn = 0;
     //for(int i = bot; i < top; i++, pn++) P[pn] = GetIntersect(L[dq[i + 1]], L[dq[i]]);
@@ -117,7 +117,7 @@ void Narrow(const Line& L1, Line& L2, double len){
 double GetInscribedCircleRadius(double range){
     double l = 0.0, r = range, mid;
     Line temp;
-    while(r - l > esp){
+    while(r - l > eps){
         mid = (l + r) / 2.0;
         for(int i = 0; i < n; i++){
             Narrow(OriL[i], temp, mid);
