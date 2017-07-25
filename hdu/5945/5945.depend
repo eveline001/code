@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1477996708 source:g:\hdu\5945\main.cpp
-	<iostream>
-	<algorithm>
-	<cstdio>
-	<cstring>
-	<cmath>
-

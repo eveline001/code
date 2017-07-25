@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1480499760 source:e:\works\code\fzu\2124\main.cpp
-	<iostream>
-	<algorithm>
-	<queue>
-	<cstdio>
-

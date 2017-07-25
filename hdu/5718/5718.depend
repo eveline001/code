@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1469973109 source:e:\works\code\hdoj\5718\main.cpp
-	<iostream>
-	<cstdio>
-	<algorithm>
-	<cstring>
-

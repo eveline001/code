@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1495786256 source:g:\githubs\code\hdu\1532\main.cpp
-	<iostream>
-	<vector>
-	<cstdio>
-	<cstring>
-

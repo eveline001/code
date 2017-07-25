@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1471415612 source:c:\users\lxw\documents\hdoj\1116u\main.cpp
-	<iostream>
-	<cstdio>
-	<string>
-	<cstring>
-

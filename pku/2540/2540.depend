@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1500254833 source:g:\githubs\code\pku\2540\main.cpp
-	<iostream>
-	<cstdio>
-	<cmath>
-	<algorithm>
-

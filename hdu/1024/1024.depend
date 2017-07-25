@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1500601716 source:g:\githubs\code\hdu\1024\main.cpp
-	<iostream>
-	<algorithm>
-	<cstdio>
-	<cstring>
-
