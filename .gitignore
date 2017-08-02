@@ -1,4 +1,11 @@
 !.gitignore
+/*
+!/51nod
+!/csu
+!/fzu
+!/hdu
+!/pku
+!/review
 /51nod/*/*
 !/51nod/*/*.cpp
 /csu/*/*
