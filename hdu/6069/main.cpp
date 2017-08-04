@@ -35,7 +35,7 @@ int main()
     for(int cas = 1; cas <= T; cas++){
         scanf("%I64d%I64d%I64d", &l, &r, &k);
         for(int i = 0; i <= r - l; i++) num[i] = l + i, cnt[i] = 1;
-        for(int i = 0; i < Pnum; i++){
+        for(int i = 0; i < Pnum && Pri[i] <= sqrt(r) + 1; i++){
             st = l - (l % Pri[i]);
             if(st < l) st += Pri[i];
             for(long long j = st; j <= r; j += Pri[i]){
