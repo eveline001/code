@@ -55,7 +55,14 @@ int main()
                 }else{
                     temp = A.bit[indexL] >> posL;
                     ans.bit[0] ^= (temp & bits[63 - posL]);
+                    st = 63 - posL;
+                    for(int k = indexL + 1; k < indexR; k++){
+                        if(st == 63){
+                            ans.bit[k - indexL] ^= A.bit[k];
+                        }else{
 
+                        }
+                    }
                 }
             }
         }
