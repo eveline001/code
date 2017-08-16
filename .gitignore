@@ -6,6 +6,8 @@
 !/hdu
 !/pku
 !/review
+!/xtu
+!/zju
 /51nod/*/*
 !/51nod/*/*.cpp
 /csu/*/*
@@ -18,3 +20,7 @@
 !/pku/*/*.cpp
 /review/*/*
 !/review/*/*.cpp
+/xtu/*/*
+!/xtu/*/*.cpp
+/zju/*/*
+!/zju/*/*.cpp
