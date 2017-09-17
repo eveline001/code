@@ -98,8 +98,8 @@ double GetCircumcircleRadius(){
            detY13 = P[0].y - P[2].y;
     double C12 = P[0].x * P[0].x - P[1].x * P[1].x + P[0].y * P[0].y - P[1].y * P[1].y,
            C13 = P[0].x * P[0].x - P[2].x * P[2].x + P[0].y * P[0].y - P[2].y * P[2].y;
-    double E = (C12 * detX13 - C13 * detX12) / (detY12 * detX13 - detY13 * detX12);
-    double D = (C12 * detY13 - C13 * detY12) / (detX12 * detY13 - detX13 * detY12);
+    double E = (C12 * detX13 - C13 * detX12) / (detY13 * detX12 - detY12 * detX13);
+    double D = (C12 * detY13 - C13 * detY12) / (detX13 * detY12 - detX12 * detY13);
     double F = -(P[0].x * P[0].x + P[0].y * P[0].y + D * P[0].x + E * P[0].y);
     return sqrt(D * D - 4.0 * F + E * E) / 2.0;
 }
